@@ -70,6 +70,6 @@ Communication uses plain text delimited by `\n`. Multi-line content ends with a 
 | **DEL**  | `DEL\n<Username>\n<Message-Number>\n`  | `OK\n` or `ERR\n` | Deletes a specific message by index. |
 | **QUIT** | `QUIT\n` | *(No response)* | Closes the connection. |
 
-## 👥 Authors
+## Authors
 
 Developed as part of a two-person group project at **FH Technikum Wien**.
