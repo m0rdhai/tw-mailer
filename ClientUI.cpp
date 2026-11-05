@@ -36,8 +36,13 @@ void ClientUI::run(ClientSocket& client)
                 std::getline(std::cin, subject);
                 
                 std::cout << "Nachrichtentext (Beenden mit einem einzelnen '.' in einer Zeile):\n";
-                while (true) {
+                while (true) 
+                {
                     std::getline(std::cin, line);
+                    if (!line.empty() && line.back() == '\r') 
+                    {
+                        line.pop_back();
+                    }
                     if (line == ".") 
                     {
                         break;
