@@ -2,6 +2,7 @@
 #include <string>
 #include "ProtocolSerializerValidator.h"
 #include "ClientSocket.h"
+#include "ClientUI.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -27,6 +28,16 @@ int main(int argc, char* argv[])
     std::string welcomeMessage = client.readline();
     std::cout << "<< " << welcomeMessage;
 
+    ClientUI ui;
+    ui.run(client);
+
+    std::cout << "Programm beendet.\n";
+    return 0;
+
+
+
+
+    /** 
     ProtocolSerializerValidator validator;
     std::string userInput;
     do {
@@ -62,6 +73,7 @@ int main(int argc, char* argv[])
 
     std::cout << "Programm beendet.\n";
     return 0;
+    **/
 }
 
 
