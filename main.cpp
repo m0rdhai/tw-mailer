@@ -1,8 +1,72 @@
 #include <iostream>
 #include <string>
 #include "ProtocolSerializerValidator.h"
+#include "ClientSocket.h"
 
-int main() {
+int main(int argc, char* argv[]) 
+{
+
+    std::string ip = "127.0.0.1";
+    int port = 6543; // Standard-Port aus der moodle ServerSample
+
+    if (argc >= 2) 
+    {
+        ip = argv[1];
+    }
+    if (argc >= 3) 
+    {
+        port = std::stoi(argv[2]);
+    }
+
+    ClientSocket client;
+    if (!client.connectToServer(ip, port))
+    {
+        return 1;
+    }
+
+    std::string welcomeMessage = client.readline();
+    std::cout << "<< " << welcomeMessage;
+
+    ProtocolSerializerValidator validator;
+    std::string userInput;
+    do {
+        std::cout << ">> ";
+        if (!std::getline(std::cin, userInput)) 
+        {
+            break;
+        }
+
+        std::string payload;
+        if (userInput == "quit") 
+        {
+            payload = validator.serializeQuit();
+        }
+         else
+        {
+            payload = userInput + "\n";
+        }
+
+        if (!client.sendData(payload)) 
+        {
+            break;
+        }
+
+        std::string response = client.readline();
+        if (response.empty()) 
+        {
+            break;
+        }
+        std::cout << "<< " << response << "\n";
+
+    } while (userInput != "quit");
+
+    std::cout << "Programm beendet.\n";
+    return 0;
+}
+
+
+
+    /** 
     ProtocolSerializerValidator validator;
 
     std::cout << "Testfaelle nur. Danach löschen, wenn wir fertig getestet haben \n\n";
@@ -39,4 +103,5 @@ int main() {
     std::cout << "Paket: " << pQuit << "--------------------\n";
 
     return 0;
-}
+    **/
+   
