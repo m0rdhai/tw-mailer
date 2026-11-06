@@ -19,4 +19,4 @@ public:
     bool deleteMessage(const std::string& username, int messageNum);
 };
 
-#endif // MAIL_SPOOLER_Hs
+#endif // MAIL_SPOOLER_H

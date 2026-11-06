@@ -1,5 +1,4 @@
 #include "MailSpooler.h"
-
 #include <fstream>
 #include <algorithm>
 

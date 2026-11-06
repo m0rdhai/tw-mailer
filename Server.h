@@ -3,7 +3,7 @@
 
 #include <string>
 #include <atomic>
-#include "MailSpooler.cpp"
+#include "MailSpooler.h"
 
 class Server {
 private:
