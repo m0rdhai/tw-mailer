@@ -5,8 +5,8 @@
 
 class ProtocolSerializerValidator {
 public:
-    bool validateUsername(std::string username);
-    bool validateSubject(std::string subject);
+    static bool validateUsername(std::string username);
+    static bool validateSubject(std::string subject);
 
     std::string serializeQuit();
     std::string serializeList(std::string username);

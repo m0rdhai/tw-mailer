@@ -10,7 +10,7 @@ bool ProtocolSerializerValidator::validateUsername(std::string username)
     }
     for (char character : username) 
     {
-        if (!((character >= '0' && character <= '9') || (character >= 'a' && character <= 'z'))) 
+        if (!isalnum(character) || isupper(character))
         {
             return false;
         }
