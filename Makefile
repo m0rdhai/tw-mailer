@@ -5,7 +5,7 @@ CLIENT_TARGET = twmailer-client
 SERVER_TARGET = twmailer-server
 
 CLIENT_SRCS = main.cpp ClientSocket.cpp ClientUI.cpp ProtocolSerializerValidator.cpp
-SERVER_SRCS = main_server.cpp Server.cpp ProtocolSerializerValidator.cpp
+SERVER_SRCS = main_server.cpp Server.cpp MailSpooler.cpp ProtocolSerializerValidator.cpp
 
 CLIENT_OBJS = $(CLIENT_SRCS:.cpp=.o)
 SERVER_OBJS = $(SERVER_SRCS:.cpp=.o)
