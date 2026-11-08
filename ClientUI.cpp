@@ -53,32 +53,36 @@ void ClientUI::run(ClientSocket& client)
                 payload = m_validator.serializeSend(sender, receiver, subject, message);
                 break;
             }
-            case 2: {
+            case 2: 
+            {
                 std::string user;
-                std::cout << "Benutzername für Postfach: ";
+                std::cout << "Benutzername vom Empfaenger: ";
                 std::getline(std::cin, user);
                 payload = m_validator.serializeList(user);
                 break;
             }
-            case 3: { 
+            case 3: 
+            { 
                 std::string user, msgNum;
-                std::cout << "Benutzername: ";
+                std::cout << "Benutzername vom Empfaenger: ";
                 std::getline(std::cin, user);
                 std::cout << "Nachrichtennummer: ";
                 std::getline(std::cin, msgNum);
                 payload = m_validator.serializeRead(user, msgNum);
                 break;
             }
-            case 4: { 
+            case 4: 
+            { 
                 std::string user, msgNum;
-                std::cout << "Benutzername: ";
+                std::cout << "Benutzername vom Empfaenger: ";
                 std::getline(std::cin, user);
                 std::cout << "Nachrichtennummer zum Löschen: ";
                 std::getline(std::cin, msgNum);
                 payload = m_validator.serializeDel(user, msgNum);
                 break;
             }
-            case 5: { 
+            case 5: 
+            { 
                 payload = m_validator.serializeQuit();
                 break;
             }
@@ -87,24 +91,66 @@ void ClientUI::run(ClientSocket& client)
                 continue;
         }
 
-        if (!client.sendData(payload)) 
+       if (!client.sendData(payload)) 
         {
             std::cout << "Konnte Daten nicht senden.\n";
             break;
         }
 
-        std::string response;
-        while (true) 
+        if (choice == 2) 
         {
-            response = client.readline();
-            if (response.empty() || response == ".\n" || response == ".") {
-                break;
+            std::string countStr = client.readline();
+            std::cout << "<< " << countStr << "\n";
+            
+            int count = 0;
+            try {
+                count = std::stoi(countStr);
+            } catch (...) {
+                count = 0;
             }
-            std::cout << "<< " << response;
-            if (response.rfind("OK", 0) == 0 || response.rfind("ERR", 0) == 0) {
-                break;
+
+            for (int i = 0; i < count; ++i) 
+            {
+                std::string subject = client.readline();
+                std::cout << "<< " << subject << "\n";
+            }
+        }
+        else if (choice == 3) 
+        {
+            std::string response = client.readline();
+            std::cout << "<< " << response << "\n";
+    
+            if (response.rfind("OK", 0) == 0) 
+            {
+                while (true) 
+                {
+                    std::string line = client.readline();
+                    if (line.empty() || line == "." || line == ".\n") 
+                    {
+                        break;
+                    }
+                    std::cout << "<< " << line << "\n";
+                }
+            }
+        }
+        else 
+        {
+            std::string response;
+            while (true) 
+            {
+                response = client.readline();
+                if (response.empty() || response == ".\n" || response == ".") 
+                {
+                    break;
+                }
+                std::cout << "<< " << response << "\n";
+                if (response.rfind("OK", 0) == 0 || response.rfind("ERR", 0) == 0) 
+                {
+                    break;
+                }
             }
         }
 
-    } while (choice != 5);
+    } 
+    while (choice != 5);
 }
