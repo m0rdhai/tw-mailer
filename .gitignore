@@ -1,0 +1,23 @@
+# Executables and Binaries
+*.o
+*.obj
+*.out
+*.app
+twmailer-client
+twmailer-server
+
+# Mail Spool Directory (Runtime data)
+/spool/
+*.spool
+
+# IDE and Editor Files
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# Build Directories
+build/
+bin/
+obj/
