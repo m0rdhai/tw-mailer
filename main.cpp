@@ -24,9 +24,9 @@ int main(int argc, char* argv[])
     {
         return 1;
     }
-
-    std::string welcomeMessage = client.readline();
-    std::cout << "<< " << welcomeMessage;
+    //kann geloesscht werden
+    //std::string welcomeMessage = client.readline();
+    //std::cout << "<< " << welcomeMessage;
 
     ClientUI ui;
     ui.run(client);
