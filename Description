@@ -11,7 +11,10 @@ DOKUMENTATION: TW-MAILER
 
 
 2. VERWENDETE TECHNOLOGIEN
-
+   - Programmmiersprache: c++17
+   - Netzwerkschnittstelle: POSIX Sockets (<sys/socket.h>, <netinet/in.h>, <arpa/inet.h>) unter Linux für verbindungsorientierte TCP/IP-Kommunikation
+   - Build-System: GNU Make (Erstellung eines Makefiles zur automatisierten Kompilierung von Client und Server mittels `g++ -std=c++17 -Wall -Wextra`).
+   - Parallelisierung: Multi-Threading via POSIX Threads / C++ Threads ("-pthread"), damit der Server mehrere Client-Verbindungen gleichzeitig bedienen kann.
 
 
 3. ENTWICKLUNGSSTRATEGIE UND BENÖTIGTE ANPASSUNGEN
