@@ -2,10 +2,12 @@ DOKUMENTATION: TW-MAILER
 
 
 1. CLIENT- UND SERVER-ARCHITEKTUR
-  - Server: Erzeugt den Server-Socket, bindet ihn an den Ziel-Port und lauscht auf eingehende Verbindungen. Jeder Client wird zur parallelen Bearbeitung 
-    in einem eigenen Thread abgearbeitet.
-  - MailSpooler: Verantwortlich für die Persistierung. Verwaltet das Dateisystem im Zielverzeichnis (Spool-Ordner), speichert eingegangene E-Mails ab, liest 
-    Postfächer aus und löscht Nachrichten.
+  - ClientSocket: Kapselt die Low-Level-Netzwerkschnittstelle (POSIX Sockets). Übernimmt den Verbindungsaufbau zum Server, das Senden von Nachrichten und das zeilenweise Einlesen von Antworten ("readline").
+  - ProtocolSerializerValidator: Dient als Validierungs- und Serialisierungsschicht. Prüft Benutzereingaben gemäß Spezifikation (z. B. Maximallängen für Empfänger und Betreff) und baut die Protokoll-Payloads auf.
+  - ClientUI: Steuert das interaktive Kommandozeilen-Menü (SEND, LIST, READ, DEL, QUIT), nimmt Benutzereingaben entgegen und koordiniert den Datenfluss zwischen Socket und Validierung.
+
+  - Server: Erzeugt den Server-Socket, bindet ihn an den Ziel-Port und lauscht auf eingehende Verbindungen. Jeder Client wird zur parallelen Bearbeitung in einem eigenen Thread abgearbeitet.
+  - MailSpooler: Verantwortlich für die Persistierung. Verwaltet das Dateisystem im Zielverzeichnis (Spool-Ordner), speichert eingegangene E-Mails ab, liest Postfächer aus und löscht Nachrichten.
 
 
 2. VERWENDETE TECHNOLOGIEN
